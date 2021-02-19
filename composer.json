@@ -1,0 +1,40 @@
+{
+    "name": "semhoun/slim-skeleton-mvc",
+    "description": "Simple Slim Framework 4 skeleton with Twig, Monolog, Doctrine in Sqlite.",
+    "license": "MIT",
+    "type": "project",
+    "keywords": ["slim-framework", "skeleton", "mvc", "sqlite", "twig", "monolog", "doctrine", "console"],
+    "authors": [
+        {
+            "name": "Nathanael Semhoun",
+            "email": "nathanael@semhoun.net",
+            "homepage": "http://www.semhoun.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\Controller\\": "src/Controller",
+            "App\\Entity\\": "src/Entity",
+            "App\\Command\\" : "src/Command",
+            "App\\Middleware\\" : "src/Middleware",
+            "App\\Renderer\\" : "src/Renderer"
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+		"ext-sqlite3": "*",
+		"slim/slim": "^4.4",
+        "slim/psr7": "^1.0",
+        "php-di/php-di": "^6.0",
+		"slim/twig-view": "^3.0",
+        "slim/flash": "^0.4.0",
+        "monolog/monolog": "2.0.0",
+        "doctrine/orm": "^2",
+        "symfony/console": "^4.2",
+        "semhoun/proxy-detection-middleware": "^0.5.0",
+        "erusev/parsedown": "^1.7"
+    },
+    "require-dev": {
+        "symfony/debug": "^4.4"
+    }
+}

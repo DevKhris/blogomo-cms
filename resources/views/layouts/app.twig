@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/app.css" />
+	<link rel="stylesheet" href="css/font-awesome.min.css" />
+	<link rel="stylesheet" href="css/simple-line-icons.css" />
+
+	<title>{{ settings.name }}</title>
+</head>
+
+<body>
+	<header>{% include "partials/navbar.twig" %}</header>
+
+	<main class="container-fluid">
+		{% if flash %} {% for f in flash %}
+		<div class="alert alert-primary alert-dismissible fade show" role="alert">
+			{{ f }}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		{% endfor %} {% endif %}{% block contents %} {% endblock %}
+	</main>
+
+	<!-- Footer -->
+	{% include "partials/footer.twig" %}
+
+	<div>
+		{% block scripts %}
+		<script src="js/lightbox-plus-jquery.min.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		{% endblock %}
+	</div>
+</body>
+
+</html>

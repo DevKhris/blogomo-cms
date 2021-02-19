@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+	<div class="container-fluid">
+		<a class="navbar-brand" href="{{ url_for('home') }}">
+			<img class="img-fluid" src="images/logo_large.png" width="156"/>
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item{% if is_current_url('home') %} active{% endif %}">
+					<a class="nav-link" href="{{ url_for('home') }}">
+						Home
+						{% if is_current_url('home') %}
+							<span class="sr-only"></span>
+						{% endif %}
+					</a>
+				</li>
+				<li class="nav-item{% if is_current_url('blog') %} active{% endif %}">
+					<a class="nav-link" href="{{ url_for('blog') }}">
+						Blog
+						{% if is_current_url('blog') %}
+							<span class="sr-only"></span>
+						{% endif %}
+					</a>
+				</li>
+
+				{# <li class="nav-item{% if is_current_url('post', {id: '1'}) %}
+																																								            active{% endif %}" #}
+			</ul>
+			<div class="my-2 my-lg-0">
+				{%if uinfo %}
+					{{ uinfo.lastname }}
+					{{ uinfo.firstname }}
+					<a class="btn btn-outline-success my-2 my-sm-0" href="{{ url_for('logout') }}">Logout</a>
+				{% else %}
+					<a class="btn btn-outline-success my-2 my-sm-0" href="{{ url_for('login') }}">Login</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</nav>
