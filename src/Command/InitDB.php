@@ -43,6 +43,7 @@ class InitDB extends Command
             'pass' => $this->settings['doctrine']['connection']['password']
         ];
         $link = new \PDO("mysql:host=$host;dbname=$dbname", $data['user'], $data['pass']);
+        
         if (!$link) {
             $output->writeLn('Can\'t open database [' . $this->settings['doctrine']['connection']['dbname'] . ']');
             return;
@@ -58,7 +59,7 @@ class InitDB extends Command
             $output->writeLn("[+] Migration Start");
             $stmt = $link->prepare($query);
             if (!$stmt->execute()) {
-                $output->writeLn('Can\'t execute statement "' . $query . '" : ');
+                $output->writeLn('[-] Can\'t execute statement "' . $query . '" : ');
                 $link->rollBack();
                 return false;
             } 

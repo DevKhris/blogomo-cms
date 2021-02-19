@@ -6,12 +6,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Post
+ * Posts
  *
  * @ORM\Table(name="posts")
  * @ORM\Entity
  */
-class Post
+class Posts
 {
     /**
      * @var int
@@ -25,16 +25,16 @@ class Post
     /**
      * @var string|null
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true, options={"default"="null","fixed"=true})
+     * @ORM\Column(name="image", type="string", length=100, nullable=true, options={"fixed"=true})
      */
-    private $image = 'null';
-    
+    private $image;
+
     /**
      * @var string|null
      *
-     * @ORM\Column(name="title", type="string", length=100, nullable=true, options={"default"="null","fixed"=true})
+     * @ORM\Column(name="title", type="string", length=100, nullable=true, options={"fixed"=true})
      */
-    private $title = 'null';
+    private $title;
 
     /**
      * @var string
@@ -46,7 +46,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text", nullable=false)
+     * @ORM\Column(name="content", type="text", length=65535, nullable=false)
      */
     private $content;
 
@@ -62,11 +62,35 @@ class Post
     }
 
     /**
+     * Set image.
+     *
+     * @param string|null $image
+     *
+     * @return Posts
+     */
+    public function setImage($image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image.
+     *
+     * @return string|null
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
      * Set title.
      *
      * @param string|null $title
      *
-     * @return Post
+     * @return Posts
      */
     public function setTitle($title = null)
     {
@@ -90,7 +114,7 @@ class Post
      *
      * @param string $slug
      *
-     * @return Post
+     * @return Posts
      */
     public function setSlug($slug)
     {
@@ -114,7 +138,7 @@ class Post
      *
      * @param string $content
      *
-     * @return Post
+     * @return Posts
      */
     public function setContent($content)
     {
@@ -131,29 +155,5 @@ class Post
     public function getContent()
     {
         return $this->content;
-    }
-
-    /**
-     * Get the value of image
-     *
-     * @return  string|null
-     */ 
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set the value of image
-     *
-     * @param  string|null  $image
-     *
-     * @return  self
-     */ 
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
     }
 }

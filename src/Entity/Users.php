@@ -6,12 +6,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
+ * Users
  *
  * @ORM\Table(name="users")
  * @ORM\Entity
  */
-class User
+class Users
 {
     /**
      * @var int
@@ -73,7 +73,7 @@ class User
      *
      * @param string $username
      *
-     * @return User
+     * @return Users
      */
     public function setUsername($username)
     {
@@ -97,7 +97,7 @@ class User
      *
      * @param string $password
      *
-     * @return User
+     * @return Users
      */
     public function setPassword($password)
     {
@@ -121,7 +121,7 @@ class User
      *
      * @param string|null $firstName
      *
-     * @return User
+     * @return Users
      */
     public function setFirstName($firstName = null)
     {
@@ -145,7 +145,7 @@ class User
      *
      * @param string|null $lastName
      *
-     * @return User
+     * @return Users
      */
     public function setLastName($lastName = null)
     {
@@ -169,7 +169,7 @@ class User
      *
      * @param string|null $email
      *
-     * @return User
+     * @return Users
      */
     public function setEmail($email = null)
     {

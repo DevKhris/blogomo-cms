@@ -1,14 +1,15 @@
 <?php
 declare(strict_types=1);
 
-use DI\ContainerBuilder;
-use Monolog\Handler\StreamHandler;
+
 use Monolog\Logger;
-use Monolog\Processor\UidProcessor;
-use Psr\Container\ContainerInterface;
+use Slim\Views\Twig;
+use DI\ContainerBuilder;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManager;
-use Slim\Views\Twig;
+use Monolog\Handler\StreamHandler;
+use Monolog\Processor\UidProcessor;
+use Psr\Container\ContainerInterface;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions(
@@ -51,7 +52,7 @@ return function (ContainerBuilder $containerBuilder) {
         },
         'parser' => function (ContainerInterface $container) {
             $settings = $container->get('settings');
-            return new Parsedown;
+            return new Parsedown();
         }
         ]
     );

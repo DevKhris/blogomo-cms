@@ -10,7 +10,7 @@ final class BlogController extends BaseController
     {
         $this->logger->info("Blog page section");
         try {
-            $posts = $this->em->getRepository('App\Entity\Post')->findAll();
+            $posts = $this->em->getRepository('App\Entity\Posts')->findAll();
         } catch (\Exception $ex) {
             throw new \Slim\Exception\HttpInternalServerErrorException($request, $ex->getMessage());
         }
@@ -22,11 +22,10 @@ final class BlogController extends BaseController
         $this->logger->info("View post");
 
         try {
-            $post = $this->em->find('App\Entity\Post', strval($args['slug']));
+            $post = $this->em->getRepository('App\Entity\Posts')->findOneBy(array('slug' => $args['slug']));
         } catch (\Exception $ex) {
             throw new \Slim\Exception\HttpInternalServerErrorException($request, $ex->getMessage());
         }
-
         return $this->render($request, $response, 'blog/show.twig', ['post' => $post]);
     }
 }

@@ -1,11 +1,38 @@
-{% extends "layouts/app.twig" %}
+{% extends "layouts/app.twig" %} {% block contents %} {% if post %}
+<div class="row">
+  <!-- Post Content Column -->
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+    <!-- Title -->
+    <h1 class="mt-4">{{ post.title }}</h1>
 
-{% block contents %}
-	<h1>Blogomo CMS</h1>
+    <!-- Author -->
+    <p class="lead">
+      by
+      <a href="#">John Doe</a>
+    </p>
 
-	{% if post %}
-		<h2>{{ post.title }}</h2>
-		<hr>
-		<p>{{ post.content }}</p>
-	{% endif %}
-{% endblock %}
+    <hr />
+
+    <!-- Date/Time -->
+    <p>Posted on January 1, 2019 at 12:00 PM</p>
+
+    <hr />
+
+    <!-- Preview Image -->
+    <img
+      class="img-fluid rounded"
+      src="{{ full_url_for('home') }}{{ post.image }}"
+      width="900"
+      height="300"
+      alt="{{ post.image }}"
+    />
+    <hr />
+    <!-- Post Content -->
+    <div class="content mb-4">
+      {{ post.content }}
+    </div>
+  </div>
+  <div class="col-lg-2"></div>
+</div>
+{% endif %} {% endblock %}
