@@ -53,5 +53,6 @@ $errorMiddleware = $app->addErrorMiddleware($settings['debug'], !$settings['debu
 $errorHandler = $errorMiddleware->getDefaultErrorHandler();
 $errorHandler->registerErrorRenderer('text/html', App\Renderer\HtmlErrorRenderer::class);
 
+
 // Run the app
 $app->run();

@@ -1,11 +1,15 @@
 /*!
- * Mod by Devkhris
+ * Mod by Devkhris - v1.0.0
  * Start Bootstrap - Landing Page v5.0.9 (https://startbootstrap.com/theme/landing-page)
  * Copyright 2013-2020 Start Bootstrap
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-landing-page/blob/master/LICENSE)
  */
 
 body {
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -16,20 +20,22 @@ h4,
 h5,
 h6 {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 div.masthead {
   background-color: #343a40;
-  background: url("../images/bg-header.jpg") no-repeat center center;
+  background-image: url("../images/bg-header.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
   padding-top: 8rem;
   padding-bottom: 8rem;
 }
 
 div.masthead h1 {
   font-size: 2rem;
-  z-index: 23 !important;
 }
 
 @media (min-width: 768px) {

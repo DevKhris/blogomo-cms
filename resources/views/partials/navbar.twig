@@ -2,7 +2,8 @@
 
 	<div class="container-fluid">
 		<a class="navbar-brand" href="{{ url_for('home') }}">
-			<img class="img-fluid" src="images/logo_large.png" width="156"/>
+			<img class="img-fluid" src="{{ full_url_for('home') }}/images/logo_large.png" width="156"/>
+
 		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -26,19 +27,34 @@
 						{% endif %}
 					</a>
 				</li>
-
-				{# <li class="nav-item{% if is_current_url('post', {id: '1'}) %}
-																																								            active{% endif %}" #}
+				<li class="nav-item{% if is_current_url('blog') %} active{% endif %}">
+					<a class="nav-link" href="{{ url_for('blog') }}">
+						About
+						{% if is_current_url('blog') %}
+							<span class="sr-only"></span>
+						{% endif %}
+					</a>
+				</li>
 			</ul>
-			<div class="my-2 my-lg-0">
-				{%if uinfo %}
-					{{ uinfo.lastname }}
-					{{ uinfo.firstname }}
-					<a class="btn btn-outline-success my-2 my-sm-0" href="{{ url_for('logout') }}">Logout</a>
-				{% else %}
-					<a class="btn btn-outline-success my-2 my-sm-0" href="{{ url_for('login') }}">Login</a>
-				{% endif %}
-			</div>
+			<ul class="navbar-nav ml-auto">
+				<div class="my-2 my-lg-0">
+					{%if uinfo %}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								{{ uinfo.firstname }}
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="#">Dashboard</a>
+								<a class="dropdown-item" href="#">Settings</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item my-2 my-sm-0" href="{{ url_for('logout') }}">Logout</a>
+							</div>
+						</li>
+					{% else %}
+						<a class="btn btn-outline-success my-2 my-sm-0" href="{{ url_for('login') }}">Login</a>
+					{% endif %}
+				</div>
+			</ul>
 		</div>
 	</div>
 </nav>

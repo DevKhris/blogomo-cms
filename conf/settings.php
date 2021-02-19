@@ -45,8 +45,11 @@ return function (ContainerBuilder $containerBuilder) {
                     'cache' => null,
                 ],
                 'connection' => [
-                    'driver' => 'pdo_sqlite',
-                    'path' => $path . '/var/blog.sqlite'
+                    'driver' => 'pdo_mysql',
+                    'dbname' => 'blogomo',
+                    'user' => 'root',
+                    'password' => '',
+                    'host' => 'localhost',
                 ]
             ],
 

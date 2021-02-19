@@ -23,44 +23,48 @@ class InitDB extends Command
     {
         $this
             // the name of the command (the part after "bin/console")
-            ->setName('app:init-db')
+            ->setName('db:migrate')
 
             // the short description shown while running "php bin/console list"
             ->setDescription('Initialize database')
 
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp('Create database structe and add initial data');
+            ->setHelp('Create database structure and add initial data');
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dbi = new \SQLite3($this->settings['doctrine']['connection']['path']);
-        if (!$dbi) {
-            $output->writeLn('Can\'t open sqlite3 database [' . $this->settings['doctrine']['connection']['path'] . ']');
+        $host = $this->settings['doctrine']['connection']['host'];
+        $dbname = $this->settings['doctrine']['connection']['dbname'];
+        $data = [
+            'user' => $this->settings['doctrine']['connection']['user'],
+            'pass' => $this->settings['doctrine']['connection']['password']
+        ];
+        $link = new \PDO("mysql:host=$host;dbname=$dbname", $data['user'], $data['pass']);
+        if (!$link) {
+            $output->writeLn('Can\'t open database [' . $this->settings['doctrine']['connection']['dbname'] . ']');
             return;
         }
-        $dbi->exec('BEGIN TRANSACTION;');
-
         $queries = [
-"CREATE TABLE post (id int primary key not null, title char(100) default null, slug char(200) not null, content text not null);",
-"INSERT INTO post VALUES(1,'First blog post','first-blog-post','This is sample blog post. If you see this content, doctrine is working fine.');",
-"CREATE TABLE user (id int primary key not null, username char(30) not null, password char(60) not null, first_name char(50), last_name char(50), email char(50));",
-"INSERT INTO user VALUES(1,'admin','\$2y\$10\$h2DgpuQvOWhpVmthACoKTuEVQHwHvcg5WjUekdvZx41hukm6LaUzy', 'Administator', 'THE', 'admin@admin.com');",
+            "CREATE TABLE posts (id int primary key not null, image char(100) default null , title char(100) default null, slug char(200) not null, content text not null);",
+            "INSERT INTO posts VALUES(1,'','First blog post','first-blog-post','This is sample blog post. If you see this content, doctrine is working fine.');",
+            "CREATE TABLE users (id int primary key not null, username char(30) not null, password char(60) not null, first_name char(50), last_name char(50), email char(50));",
+            "INSERT INTO users VALUES(1,'admin','\$2y\$10\$h2DgpuQvOWhpVmthACoKTuEVQHwHvcg5WjUekdvZx41hukm6LaUzy', 'Jhon', 'Doe', 'admin@admin.com');",
         ];
 
-        foreach($queries as $query) {
-            if (!$dbi->exec($query)) {
-                $output->writeLn('Can\'t execute SQL query "' . $query . '": ' . $dbi->lastErrorMsg());
-                $dbi->exec('ROLLBACK;');
-                return;
-            }
+        foreach ($queries as $query) {
+            $output->writeLn("[+] Migration Start");
+            $stmt = $link->prepare($query);
+            if (!$stmt->execute()) {
+                $output->writeLn('Can\'t execute statement "' . $query . '" : ');
+                $link->rollBack();
+                return false;
+            } 
+            $output->writeLn("[+] Migration Done");
         }
 
-        $dbi->exec('COMMIT;');
-
         $output->writeLn("Database structure created");
-        $dbi->close();
     }
 }

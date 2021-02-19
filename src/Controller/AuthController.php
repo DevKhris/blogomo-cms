@@ -46,7 +46,7 @@ final class AuthController extends BaseController
             $this->flash->addMessage('info', 'Logged');
             return $response->withStatus(302)->withHeader('Location', '/');
         }
-        return $this->view->render($response, 'login.twig', ['flash' => $this->flash->getMessage('info') , 'uinfo' => $request->getAttribute('uinfo')]);
+        return $this->view->render($response, 'auth/login.twig', ['flash' => $this->flash->getMessage('info') , 'uinfo' => $request->getAttribute('uinfo')]);
     }
 
     public function logout(Request $request, Response $response, array $args = []): Response

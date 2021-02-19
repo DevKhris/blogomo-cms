@@ -21,12 +21,12 @@ function rrmdir($src) {
 }
 
 // Set the absolute path to the root directory.
-$rootPath = realpath(__DIR__ . '/..');
+$path = realpath(__DIR__ . '/..');
 
-require $rootPath . '/vendor/autoload.php';
+require $path . '/vendor/autoload.php';
 
 $containerBuilder = new ContainerBuilder();
-$settings = require _$rootPath . '/conf/settings.php';
+$settings = include $path . '/conf/settings.php';
 $settings($containerBuilder);
 $container = $containerBuilder->build();
 $settings = $container->get('settings');
@@ -71,7 +71,7 @@ foreach($files as $fullpath) {
         continue;
     }
     $php = preg_replace("/<\?php/", "<?php\nnamespace App\\Entity;", $src);
-    file_put_contents($rootPath . '/src/Entity/' . $file, $php);
+    file_put_contents($path . '/src/Entity/' . $file, $php);
 }
 
 rrmdir($settings['temporary_path'] . '/tmp_entity');
