@@ -25,6 +25,13 @@ class Post
     /**
      * @var string|null
      *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true, options={"default"="null","fixed"=true})
+     */
+    private $image = 'null';
+    
+    /**
+     * @var string|null
+     *
      * @ORM\Column(name="title", type="string", length=100, nullable=true, options={"default"="null","fixed"=true})
      */
     private $title = 'null';
@@ -124,5 +131,29 @@ class Post
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Get the value of image
+     *
+     * @return  string|null
+     */ 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image
+     *
+     * @param  string|null  $image
+     *
+     * @return  self
+     */ 
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

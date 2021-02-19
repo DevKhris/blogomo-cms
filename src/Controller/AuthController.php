@@ -40,10 +40,11 @@ final class AuthController extends BaseController
                 'id' => $uinfo->getId(),
                 'firstname' => $uinfo->getFirstName(),
                 'lastname' => $uinfo->getLastName(),
-                'email' => $uinfo->getEmail()
+                'email' => $uinfo->getEmail(),
+                'username' => $uinfo->getUsername()
             ];
 
-            $this->flash->addMessage('info', 'Logged');
+            $this->flash->addMessage('info', "Welcome back, " . $session["uinfo"]['username']);
             return $response->withStatus(302)->withHeader('Location', '/');
         }
         return $this->view->render($response, 'auth/login.twig', ['flash' => $this->flash->getMessage('info') , 'uinfo' => $request->getAttribute('uinfo')]);
