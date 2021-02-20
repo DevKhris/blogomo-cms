@@ -35,23 +35,35 @@
 						{% endif %}
 					</a>
 				</li>
+				<li class="nav-item{% if is_current_url('blog') %} active{% endif %}">
+					<a class="nav-link" href="{{ url_for('blog') }}">
+						Contact
+						{% if is_current_url('blog') %}
+							<span class="sr-only"></span>
+						{% endif %}
+					</a>
+				</li>
 				<div class="my-2 my-lg-0">
 					{%if uinfo %}
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-flip="true" data-bs-toggle="dropdown" data-bs-reference="parent" aria-haspopup="true" aria-expanded="false">
 								{{ uinfo.firstname }}
+								<i class="fa fa-user-circle"></i>
 							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#">Dashboard</a>
+							<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="{{ url_for('overview') }}">Dashboard</a>
 								<a class="dropdown-item" href="#">Settings</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item my-2 my-sm-0" href="{{ url_for('logout') }}">Logout</a>
-							</div>
+								<a class="dropdown-item my-2 my-sm-0" href="{{ url_for('logout') }}">
+									<i class="fa fa-sign-in"></i>
+
+									Logout
+								</a>
+							</ul>
 						</li>
-					{% else %}
-						<a class="btn btn-outline-success my-2 my-sm-0" href="{{ url_for('login') }}">Login</a>
 					{% endif %}
 				</div>
 			</div>
 		</div>
-	</nav>
+	</div>
+</nav>

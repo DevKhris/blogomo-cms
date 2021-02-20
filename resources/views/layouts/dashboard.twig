@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8"/>
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+		<!-- CoreUI CSS -->
+		<link
+		rel="stylesheet" href="{{ full_url_for('home') }}/css/vendor/style.min.css"/>
+		<!-- CoreUI Icons -->
+		<link rel="stylesheet" href="{{ full_url_for('home') }}/css/brand.min.css"/>
+		<link rel="stylesheet" href="{{ full_url_for('home') }}/css/flag.min.css"/>
+		<link
+		rel="stylesheet" href="{{ full_url_for('home') }}/css/free.min.css"/>
+
+		<!-- Font Awesome -->
+		<link
+		rel="stylesheet" href="{{ full_url_for('home') }}/css/font-awesome.min.css"/>
+
+		<!-- Line Icons -->
+		<link rel="stylesheet" href="{{ full_url_for('home') }}/css/simple-line-icons.css"/>
+
+		<title>
+			{{ app.name }}
+		</title>
+	</head>
+
+	<body class="c-app">
+		{% include "dashboard/partials/sidebar.twig" %}
+		<div class="c-wrapper c-fixed-components">
+			<header>{% include "dashboard/partials/navbar.twig" %}</header>
+			<div class="c-body">
+				<main class="c-main"> {% block contents %}{% endblock %}
+					<div class="messages py-2">
+						{% if flash %}
+							{% for f in flash %}
+								<div class="alert alert-info alert-dismissible fade show" role="alert">
+									{{ f }}
+									<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							{% endfor %}
+						{% endif %}
+					</div>
+				</main>
+
+			</div>
+		</div>
+
+
+		<div>
+			{% block scripts %}
+				<script src="{{ full_url_for('home') }}/js/lightbox-plus-jquery.min.js"></script>
+				<script src="{{ full_url_for('home') }}/js/coreui.bundle.min.js"></script>
+			{% endblock %}
+		</div>
+	</body>
+</html>

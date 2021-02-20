@@ -14,7 +14,6 @@ return function (App $app) {
     $app->get('/post/{slug}', 'App\Controller\BlogController:view')
         ->setName('post');
 
-
     $app->group(
         '/member', 
         function (Group $group) {
@@ -30,6 +29,21 @@ return function (App $app) {
                 '/logout', 
                 'App\Controller\AuthController:logout'
             )->setName('logout');
+
+        }
+    );
+
+    $app->group(
+        '/dashboard',
+        function (Group $group) {
+            $group->map(
+                [
+                'GET',
+                'POST',
+                ],
+                '/overview',
+                'App\Controller\DashboardController:index'
+            )->setName('overview');
 
         }
     );
